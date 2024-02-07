@@ -15,6 +15,7 @@ import os, json
 from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR2 = Path(__file__).resolve().parent.parent
 
 temp = os.path.join(BASE_DIR, ".secret")
 secret_file = os.path.join(temp, "django.json")
@@ -36,7 +37,7 @@ def get_secret(setting, secret=secret):
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -129,9 +130,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR2, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR2, 'home', 'static'),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
